@@ -1,8 +1,10 @@
 
+import Header from './layouts/Header'
+
 export default function App() {
   return (
-    <div>
-      
+    <div className='bg-[#101010] h-screen min-w-[320px] max-w-full w-full'> {/* after finishing the UI change the h-screen to h-auto*/}
+      <Header className="bg-[#101010] text-[clamp(10px,5.24vw,30px)]"/>
     </div>
   )
 }

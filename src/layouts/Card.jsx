@@ -5,7 +5,7 @@ import Display from '../components/Display'
 import RefreshButton from '../components/success/Button/RefreshButton'
 import RetryButton from '../components/error/button/RetryButton'
 
-export default function Card({ className, open, setOpen }) {
+export default function Card({ className, open, setOpen, data, setData, userName }) {
   return (
     <div className={className}>
       <HeaderCard />
@@ -28,7 +28,7 @@ export default function Card({ className, open, setOpen }) {
       <Display open={open}/>
     
       {/* remove the comments to see the button */}
-      {<RefreshButton />}  {/*<RetryButton />*/}   
+      {<RefreshButton setData={setData} userName={userName}/>}  {/*<RetryButton />*/}   
     </div>
   )
 }

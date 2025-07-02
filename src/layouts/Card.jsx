@@ -1,13 +1,13 @@
-import HeaderCard from '../components/headerCard/headerCard'  
+import HeaderCard from '../components/headerCard/HeaderCard'  
 import Dropdown from '../components/dropdownLists/Dropdown'
 import Lists from '../components/dropdownLists/Lists' 
 import Display from '../components/Display'
 import RefreshButton from '../components/success/Button/RefreshButton'
 import RetryButton from '../components/error/button/RetryButton'
 
-export default function Card({ open , setOpen }) {
+export default function Card({ className, open, setOpen }) {
   return (
-    <div className='flex flex-col text-white min-w-min max-w-[340px] max-[400px]:min-w-none max-[400px]:max-w-none w-full'>
+    <div className={className}>
       <HeaderCard />
 
       <Dropdown open={open} setOpen={setOpen}>

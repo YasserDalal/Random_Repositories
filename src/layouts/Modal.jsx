@@ -16,7 +16,10 @@ export default function Modal({ className }) {
           <div className='bg-[#272727] rounded-xl py-2 px-4 w-full hover:bg-[#1f1f1f]  cursor-pointer transition ease-in-out duration-100 text-center text-[#b9b9b9] text-xl font-semibold' typeof='button'>Submit</div>
         </div>
         <div>
-          <div className=' text-gray-400 text-center'>If you don't have a Github username, kindly continue as guest</div>
+          <div className=' text-gray-400 flex gap-1 text-nowrap justify-center text-[clamp(10.3px,2.81vw,15px)] px-5 max-[336px]:text-[10.3px] max-[336px]:px-3'>
+            <div>If you don't have a Github username, kindly</div>
+            <div className='font-bold'>Continue as guest</div>
+          </div>
         </div>
         <div className='flex justify-center px-5'>
           <div className='bg-[#b9b9b9] rounded-xl py-2 px-4 w-full hover:bg-[#2a2a2a] hover:text-[#b9b9b9] cursor-pointer transition ease-in-out duration-100 text-center text-black text-xl font-semibold' typeof='button'>Continue as guest</div>

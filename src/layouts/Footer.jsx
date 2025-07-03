@@ -1,7 +1,7 @@
 
-export default function Footer({ children, onClick }) {
+export default function Footer({ className, children, onClick }) {
   return (
-    <div typeof='button' onClick={onClick}> 
+    <div className={className} typeof='button' onClick={onClick}> 
       {children}
     </div>
   )

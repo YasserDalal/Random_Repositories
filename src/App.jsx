@@ -31,7 +31,7 @@ export default function App() {
 
       {/* Modal is the first thing that users will see */}
       {openModal && (
-        <div className='absolute top-0 right-0 bottom-0 left-0 px-4'>
+        <div className='fixed top-0 right-0 bottom-0 left-0 px-4'>
           <Modal className='opacity-100 bg-[#101010] rounded-xl max-w-[500px] min-w-[300px] w-full h-96 left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 relative z-50 shadow-[0.5px_3px_20px_0px] shadow-[#717171]' setOpenModal={setOpenModal}/>
         </div>
       )}

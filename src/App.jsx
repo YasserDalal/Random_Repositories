@@ -9,9 +9,10 @@ import Modal from './layouts/Modal'
 
 export default function App() {
   const [open, setOpen] = useState(false)
-  const [userName, setUserName] = useState('YasserDalal') // change this in your GitHub username
+  const [userName, setUserName] = useState('')
   const [data, setData] = useState()
   const [openModal, setOpenModal] = useState(true)
+  const [foundUserName, setFoundUserName] = useState(false)
   useEffect(() => {
     console.log(data) // check if the data is available
   }, [data])
@@ -32,7 +33,7 @@ export default function App() {
       {/* Modal is the first thing that users will see */}
       {openModal && (
         <div className='fixed top-0 right-0 bottom-0 left-0 px-4 max-[336px]:px-2'>
-          <Modal className='opacity-100 bg-[#101010] rounded-xl max-w-[500px] min-w-[300px] w-full pb-7 left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 relative z-50 shadow-[0.5px_3px_20px_0px] shadow-[#717171]' setOpenModal={setOpenModal}/>
+          <Modal className='opacity-100 bg-[#101010] rounded-xl max-w-[500px] min-w-[300px] w-full pb-7 left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 relative z-50 shadow-[0.5px_3px_20px_0px] shadow-[#717171]' setOpenModal={setOpenModal} setUserName={setUserName} foundUserName={foundUserName} setFoundUserName={setFoundUserName} userName={userName} setData={setData}/>
         </div>
       )}
     </div>

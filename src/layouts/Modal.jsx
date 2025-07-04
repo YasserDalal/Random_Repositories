@@ -7,7 +7,7 @@ import SubmitButton from '../components/Modal/SubmitButton'
 import GuestInfo from '../components/Modal/GuestInfo'
 import GuestButton from '../components/Modal/GuestButton'
 
-export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName }) {
+export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData }) {
   const [placeholder, setPlaceholder] = useState(true)
   const [showWarning, setShowWarning] = useState(false)
   const handleClickSubmit = () => {

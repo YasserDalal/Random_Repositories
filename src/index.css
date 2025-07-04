@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  -webkit-text-fill-color: #eaeaea !important;
+}

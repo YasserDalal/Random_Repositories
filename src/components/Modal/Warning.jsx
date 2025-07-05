@@ -1,16 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamation } from '@fortawesome/free-solid-svg-icons' 
 
-export default function Warning({ showWarning, userName, foundUserName }) {
+export default function Warning({ showWarning, userName, foundUserName, noRepos }) {
   const emptyMessage = 'Oopps username cannot be empty'
   const notFoundMessage = 'User not found'
+  const noRepositoryMessage = 'User has no repositories'
   return (
-    <div className='flex px-7 pb-5 items-center gap-2'>
-      <div className={`${!showWarning && 'hidden'} w-7 flex flex-col justify-center border-2 border-red-400 h-7 rounded-full`}>
-        <FontAwesomeIcon icon={faExclamation} size='md' className={`${!showWarning && 'hidden'} text-red-400`}/>
+    <div className={`${!showWarning && 'hidden'} flex px-7 pb-5 items-center gap-2`}>
+      <div className={`w-7 flex flex-col justify-center border-2 border-red-400 h-7 rounded-full`}>
+        <FontAwesomeIcon icon={faExclamation} size='md' className={`text-red-400`}/>
       </div>
-      <div className={`${!showWarning && 'hidden'} text-red-300 text-[clamp(10px,3.9vw,18px)] select-none`}>{!userName.length && emptyMessage}</div>
-      <div className={`${!foundUserName && 'hidden'} text-red-300 text-[clamp(10px,3.9vw,18px)] select-none`}>{foundUserName && notFoundMessage}</div>
+      { 
+      // if the username is empty, show the empty message 
+      !userName.length ? <div className={`text-red-300 text-[clamp(10px,3.9vw,18px)] select-none`}>{emptyMessage}</div> : 
+      // if the username is found but has no repositories, show the no repository message
+      (noRepos && foundUserName) ? <div className={`text-red-300 text-[clamp(10px,3.9vw,18px)] select-none`}>{noRepositoryMessage}</div> :
+      // if the username is not found, show the not found message
+      !foundUserName && <div className={`text-red-300 text-[clamp(10px,3.9vw,18px)] select-none`}>{notFoundMessage}</div>}
     </div>
   )
 }

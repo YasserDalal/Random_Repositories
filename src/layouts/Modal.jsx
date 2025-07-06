@@ -60,12 +60,6 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
         noRepos={noRepos}/>
 
         <SubmitButton className='flex justify-center px-5 pb-5' 
-        setOpenModal={setOpenModal} 
-        setUserName={setUserName} 
-        userName={userName} 
-        setData={setData} 
-        setShowWarning={setShowWarning} 
-        setFoundUserName={setFoundUserName} 
         fetchRepository={fetchRepository}/>
         
         <GuestInfo className='text-gray-400 flex gap-1 text-nowrap justify-center text-[clamp(10.3px,2.81vw,15px)] px-5 pb-5 max-[336px]:text-[10.3px] max-[336px]:px-3'/>

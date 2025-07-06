@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-input:-webkit-autofill {
-  background-color: transparent !important;
+/* Input autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
   -webkit-text-fill-color: #eaeaea !important;
+  color: #eaeaea !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

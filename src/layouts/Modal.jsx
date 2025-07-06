@@ -52,7 +52,8 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
         setUserName={setUserName} 
         fetchRepository={fetchRepository} 
         setShowWarning={setShowWarning} 
-        setFoundUserName={setFoundUserName}/>
+        setFoundUserName={setFoundUserName}
+        userName={userName}/>
 
         <Warning className={`${!showWarning && 'hidden'} flex px-7 pb-5 items-center gap-2`}
         userName={userName} 

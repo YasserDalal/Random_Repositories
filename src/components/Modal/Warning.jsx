@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamation } from '@fortawesome/free-solid-svg-icons' 
 
-export default function Warning({ showWarning, userName, foundUserName, noRepos }) {
+export default function Warning({className, userName, foundUserName, noRepos }) {
   const emptyMessage = 'Oopps username cannot be empty'
   const notFoundMessage = 'User not found'
   const noRepositoryMessage = 'User has no repositories'
   return (
-    <div className={`${!showWarning && 'hidden'} flex px-7 pb-5 items-center gap-2`}>
+    <div className={className}>
       <div className={`w-7 flex flex-col justify-center border-2 border-red-400 h-7 rounded-full`}>
         <FontAwesomeIcon icon={faExclamation} size='md' className={`text-red-400`}/>
       </div>

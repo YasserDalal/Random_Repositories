@@ -46,17 +46,15 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       <div className='flex flex-col text-[#eaeaea]'>
         <Heading className='flex justify-center pt-10 pb-14'/>
 
-        <Input 
+        <Input className={`relative flex justify-center ${showWarning ? 'pb-[70px]': 'pb-20'}`}
         placeholder={placeholder} 
         setPlaceholder={setPlaceholder} 
         setUserName={setUserName} 
         fetchRepository={fetchRepository} 
-        showWarning={showWarning} 
         setShowWarning={setShowWarning} 
         setFoundUserName={setFoundUserName}/>
 
-        <Warning 
-        showWarning={showWarning} 
+        <Warning className={`${!showWarning && 'hidden'} flex px-7 pb-5 items-center gap-2`}
         userName={userName} 
         foundUserName={foundUserName} 
         noRepos={noRepos}/>

@@ -7,19 +7,26 @@ import SubmitButton from '../components/Modal/SubmitButton'
 import GuestInfo from '../components/Modal/GuestInfo'
 import GuestButton from '../components/Modal/GuestButton'
 
-export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos }) {
+export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth }) {
   const [placeholder, setPlaceholder] = useState(true)
   const [showWarning, setShowWarning] = useState(false)
 
   const handleClickSubmit = (data) => {
+    // if no data 
     if(!data || !data.length){
       setFoundUserName(true)
       setNoRepos(true)      // if the data is empty, setNoRepos to true 
       setShowWarning(true)  // if the data is empty, show the warning
+      setLoading(false)
+      setPrevName(userName)
       return;
     }
+    // if there is data
     setData(data)  // set the data
     setOpenModal(false) // close the modal
+    setLoadWidth(100) // set loadWidth to 100
+    setLoading(false) // stop loading
+    setPrevName(userName)
   }
   
   const fetchRepository = async () => {
@@ -29,14 +36,30 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
     }
 
     try {
+      // don't fetch if the username is the same as the previous one 
+      // means that this username already fails
+      if(prevName === userName) {
+        setLoading(false) // stop loading
+        setShowWarning(true) // show warning 
+        return
+      };
+
+      setLoading(true) // start loading
+      setLoadWidth(0) // reset loadWidth back to 0
+
       const response = await fetch(`https://api.github.com/users/${userName}/repos`);
+
       if (!response.ok){
         setFoundUserName(false) // if no user found setFoundUserName to false
         setShowWarning(true) // show the warning
+        setLoading(false)
+        setPrevName(userName)
         return
       };
+
       const data = await response.json(); // parse the json into object
       handleClickSubmit(data); // call handleClickSubmit
+
     } catch (err) {
       console.error('Caught error:', err.message);
     }

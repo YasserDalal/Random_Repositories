@@ -36,20 +36,18 @@ export default function App() {
       interval = setInterval(() => {
         setLoadWidth((prev) => prev + 1)
       }, 1);
+      return () => clearInterval(interval)
     } 
 
     // Loading ends
     if(!loading) {
-      // wait 1.3s before setting loadWidth to 0
+      // wait 1ms before setting loadWidth to 0
       timeout = setTimeout(() => {
         setLoadWidth(0)
-      }, 1300)
+      }, 1)
+      return () => clearTimeout(timeout)
     }
-    // clean up
-    return () => {
-      clearInterval(interval)
-      clearTimeout(timeout)
-    }
+    
   }, [loading])
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>

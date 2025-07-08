@@ -44,8 +44,8 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
         return
       };
 
-      setLoading(true) // start loading
       setLoadWidth(0) // reset loadWidth back to 0
+      setLoading(true) // start loading
 
       const response = await fetch(`https://api.github.com/users/${userName}/repos`);
 

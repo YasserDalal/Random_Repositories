@@ -32,7 +32,21 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
     }, 100)
   }
   
-  const fetchRepository = async () => {
+  const fetchRepository = async (forGuest) => {
+    // if continue as guest
+    if(forGuest === 'YasserDalal'){
+      setLoadWidth(0) // reset loadWidth back to 0
+      setLoading(true) // start loading
+      const response = await fetch(`https://api.github.com/users/${forGuest}/repos`, {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        }
+      })
+      const data = await response.json()
+      handleClickSubmit(data)
+      return;
+    }
+
     if(!userName.length){
       setShowWarning(true)  // if username is empty show the warning immediately
       return;
@@ -92,8 +106,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
         <GuestInfo className='text-gray-400 flex gap-1 text-nowrap justify-center text-[clamp(10.3px,2.81vw,15px)] px-5 pb-5 max-[336px]:text-[10.3px] max-[336px]:px-3'/>
 
         <GuestButton className='flex justify-center px-5' 
-        setUserName={setUserName} 
-        setOpenModal={setOpenModal}/>
+        fetchRepository={fetchRepository}/>
       </div>
     </div>
   )

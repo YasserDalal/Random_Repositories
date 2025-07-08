@@ -1,8 +1,7 @@
 
-export default function GuestButton({ className, setUserName, setOpenModal }) {
-  const handleClickGuest = () => {
-    setUserName('YasserDalal')
-    setOpenModal(false)
+export default function GuestButton({ className, fetchRepository }) {
+  const handleClickGuest = async () => {
+    fetchRepository('YasserDalal')
   }
   return (
     <div className={className}>

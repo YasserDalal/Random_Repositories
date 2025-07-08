@@ -12,7 +12,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
   const [showWarning, setShowWarning] = useState(false)
 
   const handleClickSubmit = (data) => {
-    // if no data 
+
     if(!data || !data.length){
       setFoundUserName(true)
       setNoRepos(true)      // if the data is empty, setNoRepos to true 
@@ -23,10 +23,13 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
     }
     // if there is data
     setData(data)  // set the data
-    setOpenModal(false) // close the modal
-    setLoadWidth(100) // set loadWidth to 100
-    setLoading(false) // stop loading
     setPrevName(userName)
+    setLoadWidth(100)
+    // after 100ms close the modal and stop loading
+    setTimeout(() => {
+      setOpenModal(false)
+      setLoading(false)
+    }, 100)
   }
   
   const fetchRepository = async () => {

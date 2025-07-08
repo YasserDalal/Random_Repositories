@@ -18,6 +18,8 @@ export default function App() {
   const [prevName, setPrevName] = useState('') // for checking if the username is the same as the previous one
   const [loading, setLoading] = useState(false) 
   const [loadWidth, setLoadWidth] = useState(0)
+  const [showBar, setShowBar] = useState(false)
+
   useEffect(() => {
     console.log(data) // check if the data is available
   }, [data])
@@ -32,23 +34,26 @@ export default function App() {
     
     // Loading starts
     if (loading) {
-      // add 1% to loadWidth every 1ms
+      // show the loading bar
+      setShowBar(true)
+      // add 1% to loadWidth every 10ms
       interval = setInterval(() => {
-        setLoadWidth((prev) => prev + 1)
-      }, 1);
-      return () => clearInterval(interval)
+        setLoadWidth(prevWidth => prevWidth + 1)
+      }, 10);
+      return () => clearInterval(interval) // clean up
     } 
 
     // Loading ends
     if(!loading) {
-      // wait 1ms before setting loadWidth to 0
+      // wait 1ms before hiding the loading bar
       timeout = setTimeout(() => {
+        setShowBar(false)
         setLoadWidth(0)
       }, 1)
-      return () => clearTimeout(timeout)
+      return () => clearTimeout(timeout) // clean up
     }
     
-  }, [loading])
+  }, [loading, data])
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
       <Header className={`${openModal && 'opacity-40 blur-[2px]'} bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20`} onClick={() => setOpen(false)}/>
@@ -64,7 +69,7 @@ export default function App() {
         <div className='fixed top-0 right-0 bottom-0 left-0 px-4 max-[336px]:px-2'>
           <Modal className='opacity-100 bg-[#101010] rounded-xl max-w-[500px] min-w-[300px] w-full pb-7 left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 relative z-50 shadow-[0.5px_3px_20px_0px] shadow-[#717171]' setOpenModal={setOpenModal} setUserName={setUserName} foundUserName={foundUserName} setFoundUserName={setFoundUserName} userName={userName} setData={setData} noRepos={noRepos} setNoRepos={setNoRepos} setLoading={setLoading} setPrevName={setPrevName} prevName={prevName} setLoadWidth={setLoadWidth}/>
           <LoadSignIn className='absolute top-0 left-0 z-40 w-full'
-          loading={loading}
+          showBar={showBar}
           loadWidth={loadWidth}/>
         </div>
       )}

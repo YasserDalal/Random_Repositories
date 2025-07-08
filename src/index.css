@@ -7,8 +7,11 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
+
+  /* use 'white' color to text if background is darker or black*/
   -webkit-text-fill-color: #eaeaea !important;
   color: #eaeaea !important;
-  background-color: transparent !important;
-  transition: background-color 5000s ease-in-out 0s;
+
+  background-color: transparent !important; /* always use transparent to background-color */
+  -webkit-transition: all 20000000000s ease-in-out 0s; /* remove default styling */
 }

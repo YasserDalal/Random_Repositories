@@ -1,6 +1,6 @@
 
-export default function RepositoryName() {
+export default function RepositoryName({ className, children }) {
   return (
-    <h2 className='text-2xl font-semibold'>Driver.js</h2>
+    <h2 className={className}>{children}</h2>
   )
 }

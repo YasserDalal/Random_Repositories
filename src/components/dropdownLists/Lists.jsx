@@ -1,6 +1,6 @@
 
-export default function Lists({ className, children }) {
+export default function Lists({ className, children, onClick }) {
   return (
-    <div className={className}>{children}</div>
+    <div className={className} typeof='button' onClick={onClick}>{children}</div>
   )
 }

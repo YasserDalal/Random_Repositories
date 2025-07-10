@@ -1,8 +1,8 @@
 
-export default function Description(){
+export default function Description({ className, children }){
   return (
-    <div className='text-gray-800 text-wrap'>
-      A light-weight, no-dependecy. vanilla Javascript engine to drive user’s focus across the page.
+    <div className={className}>
+      {children}
     </div>
   )
 }

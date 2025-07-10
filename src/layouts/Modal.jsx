@@ -7,11 +7,11 @@ import SubmitButton from '../components/Modal/SubmitButton'
 import GuestInfo from '../components/Modal/GuestInfo'
 import GuestButton from '../components/Modal/GuestButton'
 
-export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth }) {
+export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth, setRandomRepo }) {
   const [placeholder, setPlaceholder] = useState(true)
   const [showWarning, setShowWarning] = useState(false)
 
-  const handleClickSubmit = (data) => {
+  const handleClickSubmit = async (data) => {
 
     if(!data || !data.length){
       setFoundUserName(true)
@@ -22,9 +22,10 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       return;
     }
     // if there is data
-    setData(data)  // set the data
+    setData(data) // set the data
     setPrevName(userName)
     setLoadWidth(100)
+    setRandomRepo(data && data[Math.floor(Math.random() * data.length)])
     // after 100ms close the modal and stop loading
     setTimeout(() => {
       setOpenModal(false)
@@ -39,6 +40,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       setLoading(true) // start loading
       const response = await fetch(`https://api.github.com/users/${forGuest}/repos`, {
         headers: {
+          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
           Accept: 'application/vnd.github.v3+json',
         }
       })

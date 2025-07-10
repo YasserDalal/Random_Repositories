@@ -15,3 +15,14 @@ input:-webkit-autofill:active {
   background-color: transparent !important; /* always use transparent to background-color */
   -webkit-transition: all 20000000000s ease-in-out 0s; /* remove default styling */
 }
+
+/* Scroll bar */
+.my-scrollbar::-webkit-scrollbar{
+  background-color: transparent !important; /* always depends on background-color of the parent div*/
+  width: 12px !important;
+}
+
+.my-scrollbar::-webkit-scrollbar-thumb{
+  background-color: #929292 !important; /* reveal the thumb */
+  border-radius: 10px !important; /* rounded the thumb */
+}

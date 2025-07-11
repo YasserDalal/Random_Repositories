@@ -7,6 +7,7 @@ import Footer from "./layouts/Footer";
 import Watermark from "./components/Watermark/Watermark";
 import Modal from "./layouts/Modal";
 import LoadSignIn from "./components/loading/LoadSignIn";
+import SideModal from './layouts/SideModal';
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,9 @@ export default function App() {
   const [languages, setLanguages] = useState();
   const [languageColors, setLanguageColors] = useState();
   const [profilePic, setProfilePic] = useState();
+  const [welcomeGuest, setWelcomeGuest] = useState(false);
+  const [openSideModal, setOpenSideModal] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     console.log(data)
@@ -32,8 +36,7 @@ export default function App() {
         .then((res) => res.json())
         .then((data) => setLanguageColors(data));
     }
-    console.log(languageColors && languageColors[randomRepo.language].color)
-    console.log(randomRepo && randomRepo.language)
+    
     setProfilePic(data && data[data.length - 1].owner.avatar_url);
   }, [data, languages, languageColors]);
   useEffect(() => {
@@ -70,11 +73,11 @@ export default function App() {
   }, [loading, data]);
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
-      <Header className={`${ openModal && "opacity-40 blur-[2px]"} 
+      <Header className={`${ openModal && "opacity-40 blur-[2px]"} ${(welcomeGuest && !isHidden) && "opacity-20"} 
       bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50`}
       onClick={() => setOpen(false)}/>
 
-      <Center className={`${ openModal && "opacity-40 blur-[2px]" } 
+      <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${(welcomeGuest && !isHidden) && "opacity-20"} 
         bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20`}
         onClick={() => open && setOpen(false)}
       >
@@ -90,10 +93,11 @@ export default function App() {
         languagePicked={languagePicked}
         randomRepo={randomRepo}
         languageColors={languageColors}
-        setRandomRepo={setRandomRepo}/>
+        setRandomRepo={setRandomRepo}
+        welcomeGuest={welcomeGuest}/>
       </Center>
 
-      <Footer className={`${openModal && "opacity-40 blur-[2px]"}`}
+      <Footer className={`${openModal && "opacity-40 blur-[2px]"} ${(welcomeGuest && !isHidden) && "opacity-20"} `} 
         onClick={() => setOpen(false)}>
         <Watermark className='flex flex-col justify-center items-center text-[#ababab] pb-3 select-none' />
       </Footer>
@@ -117,6 +121,8 @@ export default function App() {
             setLoadWidth={setLoadWidth}
             setLanguages={setLanguages}
             setRandomRepo={setRandomRepo}
+            setOpenSideModal={setOpenSideModal}
+            setWelcomeGuest={setWelcomeGuest}
           />
           <LoadSignIn
             className='absolute top-0 left-0 z-40 w-full'
@@ -125,6 +131,15 @@ export default function App() {
           />
         </div>
       )}
+      <SideModal 
+      setWelcomeGuest={setWelcomeGuest} 
+      data={data} 
+      welcomeGuest={welcomeGuest} 
+      loading={loading} 
+      isHidden={isHidden} 
+      setIsHidden={setIsHidden}
+      openSideModal={openSideModal}
+      setOpenSideModal={setOpenSideModal}/>
     </div>
   );
 }

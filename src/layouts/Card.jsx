@@ -30,7 +30,14 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
         {languageChoices.map((choice) => (
           <Lists className='px-5 py-2 border-b-[1px] text-[17px] border-[#6d6d6d] cursor-pointer hover:bg-[#272727] flex items-center gap-2' key={choice} onClick={() => setLanguagePicked(choice)}>
             <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: languageColors ? languageColors[choice].color : '#000' }}></div>
-            <div>{choice}</div>
+            <div className='flex justify-between flex-1'>
+              <div>
+                {choice}
+              </div> 
+              <div>
+                {languagePicked === choice ? '✓' : ''}
+              </div>
+            </div>
           </Lists>
         ))}
       </Dropdown> 

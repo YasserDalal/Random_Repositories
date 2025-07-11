@@ -7,26 +7,32 @@ import Display from '../components/Display'
 import RefreshButton from '../components/success/Button/RefreshButton'
 import RetryButton from '../components/error/button/RetryButton'
 
-export default function Card({ className, open, setOpen, data, profilePic, setLanguagePicked, languagePicked, randomRepo, setRandomRepo, languageColors }) {
+export default function Card({ className, open, setOpen, data, profilePic, setLanguagePicked, languagePicked, randomRepo, setRandomRepo, languageColors, welcomeGuest }) {
   const [languageChoices, setLanguageChoices] = useState(['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'C#', 'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'Kotlin', 'Dart', 'Scala', 'Objective-C', 'Haskell', 'Perl', 'R', 'Lua', 'Groovy', 'Shell', 'Pascal']);
   const [previousRepo, setPreviousRepo] = useState();
 
   const handleRandomRepo = () => {
-
-    const filteredData = data.filter(repo => repo.language === languagePicked);
+    const filteredData = languagePicked ? data.filter(repo => repo.language === languagePicked) : data;
     const randomIndex = Math.floor(Math.random() * filteredData.length);
-    if(previousRepo === filteredData[randomIndex]){
-      handleRandomRepo();
-    }else if(languageChoices.includes(filteredData[randomIndex].language)){
-      setPreviousRepo(filteredData[randomIndex]);
+
+    if(!languagePicked){
       setRandomRepo(filteredData[randomIndex]);
+      setPreviousRepo(filteredData[randomIndex]);
+      return;
     }
+
+    if(languageChoices.includes(filteredData[randomIndex].language) && filteredData[randomIndex] !== previousRepo){
+      setRandomRepo(filteredData[randomIndex]);
+      setPreviousRepo(filteredData[randomIndex]);
+      return;
+    }
+    handleRandomRepo();
   };
   return (
     <div className={className}>
       <HeaderCard profilePic={profilePic}/>
 
-      <Dropdown open={open} setOpen={setOpen} languagePicked={languagePicked} languageColors={languageColors}>
+      <Dropdown open={open} setOpen={setOpen} languagePicked={languagePicked} languageColors={languageColors} welcomeGuest={welcomeGuest}>
         {languageChoices.map((choice) => (
           <Lists className='px-5 py-2 border-b-[1px] text-[17px] border-[#6d6d6d] cursor-pointer hover:bg-[#272727] flex items-center gap-2' key={choice} onClick={() => setLanguagePicked(choice)}>
             <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: languageColors ? languageColors[choice].color : '#000' }}></div>
@@ -45,7 +51,7 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
       <Display open={open} randomRepo={randomRepo} languageColors={languageColors}/>
     
       {/* remove the comments to see the button */}
-      {<RefreshButton languagePicked={languagePicked} data={data} handleRandomRepo={handleRandomRepo}/>}  {/*<RetryButton />*/}   
+      {<RefreshButton languagePicked={languagePicked} data={data} handleRandomRepo={handleRandomRepo} welcomeGuest={welcomeGuest}/>}  {/*<RetryButton />*/}   
     </div>
   )
 }

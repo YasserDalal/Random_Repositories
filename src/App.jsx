@@ -73,11 +73,11 @@ export default function App() {
   }, [loading, data]);
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
-      <Header className={`${ openModal && "opacity-40 blur-[2px]"} ${(welcomeGuest && !isHidden) && "opacity-20"} 
+      <Header className={`${ openModal && "opacity-40 blur-[2px]"} ${(isHidden) && "opacity-20"} 
       bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50`}
       onClick={() => setOpen(false)}/>
 
-      <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${(welcomeGuest && !isHidden) && "opacity-20"} 
+      <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${(isHidden) && "opacity-20"} 
         bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20`}
         onClick={() => open && setOpen(false)}
       >
@@ -97,7 +97,7 @@ export default function App() {
         welcomeGuest={welcomeGuest}/>
       </Center>
 
-      <Footer className={`${openModal && "opacity-40 blur-[2px]"} ${(welcomeGuest && !isHidden) && "opacity-20"} `} 
+      <Footer className={`${openModal && "opacity-40 blur-[2px]"} ${(isHidden) && "opacity-20"} `} 
         onClick={() => setOpen(false)}>
         <Watermark className='flex flex-col justify-center items-center text-[#ababab] pb-3 select-none' />
       </Footer>
@@ -123,6 +123,7 @@ export default function App() {
             setRandomRepo={setRandomRepo}
             setOpenSideModal={setOpenSideModal}
             setWelcomeGuest={setWelcomeGuest}
+            setIsHidden={setIsHidden}
           />
           <LoadSignIn
             className='absolute top-0 left-0 z-40 w-full'
@@ -134,9 +135,7 @@ export default function App() {
       <SideModal 
       setWelcomeGuest={setWelcomeGuest} 
       data={data} 
-      welcomeGuest={welcomeGuest} 
-      loading={loading} 
-      isHidden={isHidden} 
+      welcomeGuest={welcomeGuest}  
       setIsHidden={setIsHidden}
       openSideModal={openSideModal}
       setOpenSideModal={setOpenSideModal}/>

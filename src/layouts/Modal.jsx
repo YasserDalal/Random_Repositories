@@ -7,7 +7,7 @@ import SubmitButton from '../components/Modal/SubmitButton'
 import GuestInfo from '../components/Modal/GuestInfo'
 import GuestButton from '../components/Modal/GuestButton'
 
-export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth, setRandomRepo, setOpenSideModal, setWelcomeGuest }) {
+export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth, setRandomRepo, setOpenSideModal, setWelcomeGuest, setIsHidden }) {
   const [placeholder, setPlaceholder] = useState(true)
   const [showWarning, setShowWarning] = useState(false)
 
@@ -48,6 +48,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       handleClickSubmit(data)
       setOpenSideModal(true)
       setWelcomeGuest(true)
+      setIsHidden(true)
       return;
     }
 

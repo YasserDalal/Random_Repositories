@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHand } from '@fortawesome/free-solid-svg-icons'
-import RepositoryIcon from '../../assets/git.png'
+import RepositoryIcon from '../../../assets/git.png'
 import VisitButton from './VisitButton'
 
 export default function GuestModal() {

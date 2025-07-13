@@ -1,5 +1,5 @@
 import CloseButton from './CloseButton'
-import GuestModal from '../GuestModal/GuestModal'
+import GuestModal from './GuestModal/GuestModal'
 import { useState, useEffect } from 'react'
 
 export default function SideModal({ setWelcomeGuest, data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden }) {

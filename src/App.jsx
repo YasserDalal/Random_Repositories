@@ -7,7 +7,7 @@ import Footer from "./layouts/Footer";
 import Watermark from "./components/Watermark/Watermark";
 import Modal from "./layouts/Modal";
 import LoadSignIn from "./components/loading/LoadSignIn";
-import SideModal from './layouts/SideModal';
+import SideModal from "./components/SideModal/SideModal";
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ export default function App() {
   const [loadWidth, setLoadWidth] = useState(0);
   const [showBar, setShowBar] = useState(false);
   const [randomRepo, setRandomRepo] = useState();
-  const [languagePicked, setLanguagePicked] = useState('');
+  const [languagePicked, setLanguagePicked] = useState("");
   const [languages, setLanguages] = useState();
   const [languageColors, setLanguageColors] = useState();
   const [profilePic, setProfilePic] = useState();
@@ -30,13 +30,15 @@ export default function App() {
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    console.log(data)
+    console.log(data);
     if (data && !languages && !languageColors) {
-      fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json')
+      fetch(
+        "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
+      )
         .then((res) => res.json())
         .then((data) => setLanguageColors(data));
     }
-    
+
     setProfilePic(data && data[data.length - 1].owner.avatar_url);
   }, [data, languages, languageColors]);
   useEffect(() => {
@@ -73,32 +75,45 @@ export default function App() {
   }, [loading, data]);
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
-      <Header className={`${ openModal && "opacity-40 blur-[2px]"} ${(isHidden) && "opacity-20"} 
+      <Header
+        className={`${openModal && "opacity-40 blur-[2px]"} ${
+          isHidden && "opacity-20"
+        } 
       bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50`}
-      onClick={() => setOpen(false)}/>
+        onClick={() => setOpen(false)}
+      />
 
-      <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${(isHidden) && "opacity-20"} 
+      <Center
+        className={`${openModal && "opacity-40 blur-[2px]"} ${
+          isHidden && "opacity-20"
+        } 
         bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20`}
         onClick={() => open && setOpen(false)}
       >
-        <Card className={`${ openModal && "opacity-40 blur-[2px]" } 
+        <Card
+          className={`${openModal && "opacity-40 blur-[2px]"} 
         flex flex-col text-white min-w-min max-w-[340px] max-[400px]:min-w-none max-[400px]:max-w-none w-full`}
-        open={open}
-        setOpen={setOpen}
-        setData={setData}
-        userName={userName}
-        profilePic={profilePic}
-        data={data}
-        setLanguagePicked={setLanguagePicked}
-        languagePicked={languagePicked}
-        randomRepo={randomRepo}
-        languageColors={languageColors}
-        setRandomRepo={setRandomRepo}
-        welcomeGuest={welcomeGuest}/>
+          open={open}
+          setOpen={setOpen}
+          setData={setData}
+          userName={userName}
+          profilePic={profilePic}
+          data={data}
+          setLanguagePicked={setLanguagePicked}
+          languagePicked={languagePicked}
+          randomRepo={randomRepo}
+          languageColors={languageColors}
+          setRandomRepo={setRandomRepo}
+          welcomeGuest={welcomeGuest}
+        />
       </Center>
 
-      <Footer className={`${openModal && "opacity-40 blur-[2px]"} ${(isHidden) && "opacity-20"} `} 
-        onClick={() => setOpen(false)}>
+      <Footer
+        className={`${openModal && "opacity-40 blur-[2px]"} ${
+          isHidden && "opacity-20"
+        } `}
+        onClick={() => setOpen(false)}
+      >
         <Watermark className='flex flex-col justify-center items-center text-[#ababab] pb-3 select-none' />
       </Footer>
 
@@ -132,13 +147,14 @@ export default function App() {
           />
         </div>
       )}
-      <SideModal 
-      setWelcomeGuest={setWelcomeGuest} 
-      data={data} 
-      welcomeGuest={welcomeGuest}  
-      setIsHidden={setIsHidden}
-      openSideModal={openSideModal}
-      setOpenSideModal={setOpenSideModal}/>
+      <SideModal
+        setWelcomeGuest={setWelcomeGuest}
+        data={data}
+        welcomeGuest={welcomeGuest}
+        setIsHidden={setIsHidden}
+        openSideModal={openSideModal}
+        setOpenSideModal={setOpenSideModal}
+      />
     </div>
   );
 }

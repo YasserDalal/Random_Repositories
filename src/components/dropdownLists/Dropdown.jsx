@@ -4,10 +4,10 @@ import { faCaretDown} from '@fortawesome/free-solid-svg-icons'
 
 const defaultText = 'Select a Language'
 
-export default function Dropdown({ children, open, setOpen, languagePicked, languageColors, welcomeGuest }) {
+export default function Dropdown({ children, open, setOpen, languagePicked, languageColors, isHidden }) {
   return (
     <div className='relative pb-6'>
-      <div className={`bg-[#101010] flex justify-between px-4 border border-white rounded-lg py-2 ${!welcomeGuest && 'cursor-pointer hover:brightness-75 transition ease-in-out duration-100'} z-50 relative`} typeof='button' onClick={() => !welcomeGuest && setOpen(!open)}>
+      <div className={`bg-[#101010] flex justify-between px-4 border border-white rounded-lg py-2 ${!isHidden && 'cursor-pointer hover:brightness-75 transition ease-in-out duration-100'} z-50 relative`} typeof='button' onClick={() => !isHidden && setOpen(!open)}>
         <div className='text-[20px] font-semibold flex items-center'>
           {languagePicked ? 
             (<>

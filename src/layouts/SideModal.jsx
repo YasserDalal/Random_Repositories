@@ -5,7 +5,17 @@ import { useState, useEffect } from 'react'
 export default function SideModal({ setWelcomeGuest, data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden }) {
   const [visibleAnimate, setVisibleAnimate] = useState(true)
 
+  /*        -------------at first render--------------------
+            ↓                     ↓                        ↓
+      openSideModal = false | visibleAnimate = true | welcomeGuest = false
+  */
+
   useEffect(() => {
+    /*
+      openSideModal will be true 
+      after we fetch the data inside Modal.jsx
+    */
+
     // starts the opening animation
     if (openSideModal) setVisibleAnimate(true)
     
@@ -34,7 +44,7 @@ export default function SideModal({ setWelcomeGuest, data, welcomeGuest, openSid
     setTimeout(() => welcomeGuest && setWelcomeGuest(false), 300) // wait for 300ms of closing animation
   }
  
-  /* if states openSideModal is false and visibleAnimate is false, 
+  /* if openSideModal is false and visibleAnimate is false, 
     then don't render the whole component */
   if (!openSideModal && !visibleAnimate) return null;
 

@@ -12,20 +12,28 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
   const [previousRepo, setPreviousRepo] = useState();
 
   const handleRandomRepo = () => {
+    /* 
+      filter the data based on the languagePicked 
+      no language picked? pass the whole data
+    */
     const filteredData = languagePicked ? data.filter(repo => repo.language === languagePicked) : data;
     const randomIndex = Math.floor(Math.random() * filteredData.length);
 
-    if(!languagePicked){
+    // if there is no language picked and the repo is not the same as the previous one
+    if(!languagePicked && filteredData[randomIndex] !== previousRepo){
       setRandomRepo(filteredData[randomIndex]);
       setPreviousRepo(filteredData[randomIndex]);
       return;
     }
 
+    // if there is a language picked and the repo is not the same as the previous one
     if(languageChoices.includes(filteredData[randomIndex].language) && filteredData[randomIndex] !== previousRepo){
       setRandomRepo(filteredData[randomIndex]);
       setPreviousRepo(filteredData[randomIndex]);
       return;
     }
+
+    // call again to create another random repo
     handleRandomRepo();
   };
   return (

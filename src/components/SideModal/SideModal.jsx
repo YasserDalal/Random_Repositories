@@ -1,21 +1,19 @@
 import CloseButton from './CloseButton'
 import GuestModal from './GuestModal/GuestModal'
+import UserModal from './UserModal/UserModal'
 import { useState, useEffect } from 'react'
 
-export default function SideModal({ setWelcomeGuest, data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden }) {
+export default function SideModal({ setWelcomeGuest, data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden, welcomeUser }) {
   const [visibleAnimate, setVisibleAnimate] = useState(true)
-
   /*        -------------at first render--------------------
             ↓                     ↓                        ↓
       openSideModal = false | visibleAnimate = true | welcomeGuest = false
   */
-
   useEffect(() => {
     /*
       openSideModal will be true 
       after we fetch the data inside Modal.jsx
     */
-
     // starts the opening animation
     if (openSideModal) setVisibleAnimate(true)
     
@@ -53,7 +51,8 @@ export default function SideModal({ setWelcomeGuest, data, welcomeGuest, openSid
     bg-[#131313] bottom-0 right-3
     transition-all ease-in-out duration-200 w-[420px] h-72 rounded-[26px] px-5 pt-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}> 
       <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' onClick={handleCloseSideModal}/>
-      {welcomeGuest && <GuestModal />}
+      {(welcomeGuest && !welcomeUser) && <GuestModal />}
+      {(!welcomeGuest && welcomeUser) && <UserModal data={data} welcomeUser={welcomeUser}/>}
     </div>
     )
 }

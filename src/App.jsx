@@ -26,6 +26,7 @@ export default function App() {
   const [languageColors, setLanguageColors] = useState();
   const [profilePic, setProfilePic] = useState();
   const [welcomeGuest, setWelcomeGuest] = useState(false);
+  const [welcomeUser, setWelcomeUser] = useState(false);
   const [openSideModal, setOpenSideModal] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -105,6 +106,7 @@ export default function App() {
           languageColors={languageColors}
           setRandomRepo={setRandomRepo}
           welcomeGuest={welcomeGuest}
+          isHidden={isHidden}
         />
       </Center>
 
@@ -138,6 +140,7 @@ export default function App() {
             setRandomRepo={setRandomRepo}
             setOpenSideModal={setOpenSideModal}
             setWelcomeGuest={setWelcomeGuest}
+            setWelcomeUser={setWelcomeUser}
             setIsHidden={setIsHidden}
           />
           <LoadSignIn
@@ -151,6 +154,7 @@ export default function App() {
         setWelcomeGuest={setWelcomeGuest}
         data={data}
         welcomeGuest={welcomeGuest}
+        welcomeUser={welcomeUser}
         setIsHidden={setIsHidden}
         openSideModal={openSideModal}
         setOpenSideModal={setOpenSideModal}

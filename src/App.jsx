@@ -151,7 +151,6 @@ export default function App() {
         </div>
       )}
       <SideModal
-        setWelcomeGuest={setWelcomeGuest}
         data={data}
         welcomeGuest={welcomeGuest}
         welcomeUser={welcomeUser}

@@ -31,7 +31,6 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       setOpenModal(false)
       setLoading(false)
       setWelcomeUser(true)
-      setWelcomeGuest(false)
       setOpenSideModal(true)
       setIsHidden(true)
     }, 100)
@@ -52,7 +51,6 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       handleClickSubmit(data)
       setOpenSideModal(true)
       setWelcomeGuest(true)
-      setWelcomeUser(false)
       setIsHidden(true)
       return;
     }

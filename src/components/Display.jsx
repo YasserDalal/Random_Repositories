@@ -1,8 +1,8 @@
 import Repository from './success/Repository'
 
-export default function Display({ open, randomRepo, languageColors }) {
+export default function Display({ className, randomRepo, languageColors, onClick }) {
   return (
-    <div className={`first-letter:flex flex-col gap-6 pb-6 text-black h-full ${open && 'brightness-[.4]'}`}>
+    <div className={className} typeof='button' onClick={onClick}>
       {<Repository randomRepo={randomRepo} languageColors={languageColors}/>}
     </div>
   )

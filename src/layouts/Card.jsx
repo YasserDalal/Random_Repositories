@@ -53,6 +53,10 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
     // call again to create another random repo
     handleRandomRepo();
   };
+
+  const handleNavigateToRepo = () => {
+    window.open(randomRepo.html_url, '_blank');
+  }
   return (
     <div className={className}>
       <HeaderCard profilePic={profilePic}/>
@@ -73,7 +77,7 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
         ))}
       </Dropdown> 
 
-      <Display open={open} randomRepo={randomRepo} languageColors={languageColors}/>
+      <Display className={`first-letter:flex flex-col gap-6 pb-6 text-black h-full ${open && 'brightness-[.4]'} cursor-pointer hover:brightness-75 transition ease-in-out duration-100`} randomRepo={randomRepo} languageColors={languageColors} onClick={handleNavigateToRepo}/>
     
       {/* remove the comments to see the button */}
       {<RefreshButton languagePicked={languagePicked} data={data} handleRandomRepo={handleRandomRepo} isHidden={isHidden}/>}

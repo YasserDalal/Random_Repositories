@@ -5,7 +5,6 @@ import Dropdown from '../components/dropdownLists/Dropdown'
 import Lists from '../components/dropdownLists/Lists' 
 import Display from '../components/Display'
 import RefreshButton from '../components/success/Button/RefreshButton'
-import RetryButton from '../components/error/button/RetryButton'
 
 export default function Card({ className, open, setOpen, data, profilePic, setLanguagePicked, languagePicked, randomRepo, setRandomRepo, languageColors, isHidden, setNoLanguage, setOneRepo, setOpenSideModal, setIsHidden }) {
   const [languageChoices, setLanguageChoices] = useState(['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'C#', 'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'Kotlin', 'Dart', 'Scala', 'Objective-C', 'Haskell', 'Perl', 'R', 'Lua', 'Groovy', 'Shell', 'Pascal']);
@@ -77,7 +76,7 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
       <Display open={open} randomRepo={randomRepo} languageColors={languageColors}/>
     
       {/* remove the comments to see the button */}
-      {<RefreshButton languagePicked={languagePicked} data={data} handleRandomRepo={handleRandomRepo} isHidden={isHidden}/>}  {/*<RetryButton />*/}   
+      {<RefreshButton languagePicked={languagePicked} data={data} handleRandomRepo={handleRandomRepo} isHidden={isHidden}/>}
     </div>
   )
 }

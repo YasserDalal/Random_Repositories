@@ -12,6 +12,7 @@ import SideModal from "./components/SideModal/SideModal";
 export default function App() {
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("");
+  const [profileData, setProfileData] = useState();
   const [data, setData] = useState();
   const [openModal, setOpenModal] = useState(true);
   const [foundUserName, setFoundUserName] = useState(false);
@@ -29,6 +30,10 @@ export default function App() {
   const [welcomeUser, setWelcomeUser] = useState(false);
   const [openSideModal, setOpenSideModal] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [noLanguage, setNoLanguage] = useState(false);
+  const [oneRepo, setOneRepo] = useState(false);
+
+  useEffect(() => console.log(profileData), [profileData])
 
   useEffect(() => {
     console.log(data);
@@ -107,6 +112,11 @@ export default function App() {
           setRandomRepo={setRandomRepo}
           welcomeGuest={welcomeGuest}
           isHidden={isHidden}
+          profileData={profileData}
+          setNoLanguage={setNoLanguage}
+          setOneRepo={setOneRepo}
+          setOpenSideModal={setOpenSideModal}
+          setIsHidden={setIsHidden} 
         />
       </Center>
 
@@ -142,6 +152,7 @@ export default function App() {
             setWelcomeGuest={setWelcomeGuest}
             setWelcomeUser={setWelcomeUser}
             setIsHidden={setIsHidden}
+            setProfileData={setProfileData}
           />
           <LoadSignIn
             className='absolute top-0 left-0 z-40 w-full'
@@ -157,6 +168,12 @@ export default function App() {
         setIsHidden={setIsHidden}
         openSideModal={openSideModal}
         setOpenSideModal={setOpenSideModal}
+        noLanguage={noLanguage} 
+        oneRepo={oneRepo}
+        languageColors={languageColors}
+        languagePicked={languagePicked}
+        setNoLanguage={setNoLanguage}
+        setOneRepo={setOneRepo}
       />
     </div>
   );

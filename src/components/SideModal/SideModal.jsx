@@ -1,9 +1,10 @@
 import CloseButton from './CloseButton'
 import GuestModal from './GuestModal/GuestModal'
 import UserModal from './UserModal/UserModal'
+import MessageModal from './MessageModal/MessageModal'
 import { useState, useEffect } from 'react'
 
-export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden, welcomeUser }) {
+export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden, welcomeUser, noLanguage, oneRepo, languageColors, languagePicked, setNoLanguage, setOneRepo }) {
   const [visibleAnimate, setVisibleAnimate] = useState(true)
   /*        -------------at first render--------------------
             ↓                     ↓                        ↓
@@ -25,7 +26,11 @@ export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSi
                      ↓
                      ↓                                                    */
     if (!openSideModal){
-      const timeout = setTimeout(() => setVisibleAnimate(false), 300) // wait for 300ms of closing animation
+      const timeout = setTimeout(() => {
+        setVisibleAnimate(false)
+        setNoLanguage(false)
+        setOneRepo(false)
+      }, 300) // wait for 300ms of closing animation
       return () => clearTimeout(timeout) // clean up
     }
   }, [openSideModal])
@@ -40,17 +45,33 @@ export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSi
     setOpenSideModal(false)
   }
  
-  /* if openSideModal is false and visibleAnimate is false, 
-    then don't render the whole component */
-  if (!openSideModal && !visibleAnimate) return null;
+  /* if openSideModal is false and visibleAnimate is false,
+    then don't render the whole component */ 
+  if (!openSideModal && !visibleAnimate && ((!noLanguage || !oneRepo))) {
+    return null
+  };
 
   return ( 
-    <div className={`${(data && openSideModal && visibleAnimate) ? '-translate-y-8 flex flex-col' : 'translate-y-96'} fixed
-    bg-[#131313] bottom-0 right-3
-    transition-all ease-in-out duration-200 w-[420px] h-72 rounded-[26px] px-5 pt-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}> 
-      <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' onClick={handleCloseSideModal}/>
-      {welcomeGuest && <GuestModal />}
-      {!welcomeGuest && <UserModal data={data} welcomeUser={welcomeUser}/>}
-    </div>
-    )
+    <>
+      {((welcomeGuest || !welcomeGuest) && !noLanguage && !oneRepo) && 
+      
+        <div className={`${(data && openSideModal && visibleAnimate) ? '-translate-y-8 flex flex-col' : 'translate-y-96'} 
+        fixed bg-[#131313] bottom-0 right-3 transition-all ease-in-out duration-200 w-[420px] h-72 rounded-[26px] 
+        px-5 pt-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}> 
+          <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' onClick={handleCloseSideModal}/>
+          {welcomeGuest && <GuestModal />}
+          {!welcomeGuest && <UserModal data={data} welcomeUser={welcomeUser}/>}
+        </div>
+      }
+      {(noLanguage || oneRepo) &&
+
+        <div className={`${(data && openSideModal && visibleAnimate) ? '-translate-y-8 flex flex-col' : '-translate-y-8 translate-x-[460px]'} 
+          fixed bg-[#131313] bottom-0 right-3 transition-all ease-in-out duration-200 w-[420px] h-auto rounded-[26px] 
+          px-5 pt-5  shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}>
+          <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' onClick={handleCloseSideModal}/>
+          {(noLanguage || oneRepo) && <MessageModal className='text-[#d0d0d0] pb-5' noLanguage={noLanguage} oneRepo={oneRepo} languageColors={languageColors} languagePicked={languagePicked}/>}
+        </div>
+      }
+    </>
+  )
 }

@@ -7,7 +7,7 @@ import Display from '../components/Display'
 import RefreshButton from '../components/success/Button/RefreshButton'
 import RetryButton from '../components/error/button/RetryButton'
 
-export default function Card({ className, open, setOpen, data, profilePic, setLanguagePicked, languagePicked, randomRepo, setRandomRepo, languageColors, isHidden }) {
+export default function Card({ className, open, setOpen, data, profilePic, setLanguagePicked, languagePicked, randomRepo, setRandomRepo, languageColors, isHidden, setNoLanguage, setOneRepo, setOpenSideModal, setIsHidden }) {
   const [languageChoices, setLanguageChoices] = useState(['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'C#', 'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'Kotlin', 'Dart', 'Scala', 'Objective-C', 'Haskell', 'Perl', 'R', 'Lua', 'Groovy', 'Shell', 'Pascal']);
   const [previousRepo, setPreviousRepo] = useState();
 
@@ -18,6 +18,24 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
     */
     const filteredData = languagePicked ? data.filter(repo => repo.language === languagePicked) : data;
     const randomIndex = Math.floor(Math.random() * filteredData.length);
+    
+    // if there is no language found in repository
+    if(filteredData.length === 0){
+      setNoLanguage(true);
+      setOpenSideModal(true);
+      setIsHidden(true);
+      return;
+    }
+
+    // if there is only one repository
+    if(filteredData.length === 1){
+      setOneRepo(true);
+      setOpenSideModal(true);
+      setIsHidden(true);
+      setRandomRepo(filteredData[0]);
+      setPreviousRepo(filteredData[0]);
+      return;
+    }
 
     // if there is no language picked and the repo is not the same as the previous one
     if(!languagePicked && filteredData[randomIndex] !== previousRepo){

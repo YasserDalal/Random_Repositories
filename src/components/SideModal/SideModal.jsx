@@ -4,7 +4,7 @@ import UserModal from './UserModal/UserModal'
 import MessageModal from './MessageModal/MessageModal'
 import { useState, useEffect } from 'react'
 
-export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden, welcomeUser, noLanguage, oneRepo, languageColors, languagePicked, setNoLanguage, setOneRepo }) {
+export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSideModal, setIsHidden, welcomeUser, noLanguage, oneRepo, languageColors, languagePicked, setNoLanguage, setOneRepo, profileData }) {
   const [visibleAnimate, setVisibleAnimate] = useState(true)
   /*        -------------at first render--------------------
             ↓                     ↓                        ↓
@@ -60,7 +60,7 @@ export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSi
         px-5 pt-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}> 
           <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' onClick={handleCloseSideModal}/>
           {welcomeGuest && <GuestModal />}
-          {!welcomeGuest && <UserModal data={data} welcomeUser={welcomeUser}/>}
+          {!welcomeGuest && <UserModal data={data} welcomeUser={welcomeUser} profileData={profileData}/>}
         </div>
       }
       {(noLanguage || oneRepo) &&

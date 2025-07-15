@@ -163,6 +163,7 @@ export default function App() {
       )}
       <SideModal
         data={data}
+        profileData={profileData}
         welcomeGuest={welcomeGuest}
         welcomeUser={welcomeUser}
         setIsHidden={setIsHidden}

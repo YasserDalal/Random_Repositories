@@ -7,7 +7,7 @@ import SubmitButton from '../components/Modal/SubmitButton'
 import GuestInfo from '../components/Modal/GuestInfo'
 import GuestButton from '../components/Modal/GuestButton'
 
-export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth, setRandomRepo, setOpenSideModal, setWelcomeGuest, setWelcomeUser, setIsHidden }) {
+export default function Modal({ className, setFoundUserName, foundUserName, setOpenModal, setUserName, userName, setData, setNoRepos, noRepos, setLoading, setPrevName, prevName, setLoadWidth, setRandomRepo, setOpenSideModal, setWelcomeGuest, setWelcomeUser, setIsHidden, setProfileData }) {
   const [placeholder, setPlaceholder] = useState(true)
   const [showWarning, setShowWarning] = useState(false)
 
@@ -47,8 +47,16 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
           Accept: 'application/vnd.github.v3+json',
         }
       })
-      const data = await response.json()
+      const profile = await fetch(`https://api.github.com/users/${forGuest}`, {
+        headers: {
+          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        }
+      })
+      const data = await response.json() // repo data
+      const profileData = await profile.json() // user data
       handleClickSubmit(data)
+      setProfileData(profileData)
       setOpenSideModal(true)
       setWelcomeGuest(true)
       setIsHidden(true)
@@ -74,6 +82,13 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
 
       const response = await fetch(`https://api.github.com/users/${userName}/repos`);
 
+      const profile = await fetch(`https://api.github.com/users/${userName}`, {
+        headers: {
+          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        }
+      })
+
       if (!response.ok){
         setFoundUserName(false) // if no user found setFoundUserName to false
         setShowWarning(true) // show the warning
@@ -83,6 +98,8 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       };
 
       const data = await response.json(); // parse the json into object
+      const profileData = await profile.json()
+      setProfileData(profileData)
       handleClickSubmit(data); // call handleClickSubmit
 
     } catch (err) {

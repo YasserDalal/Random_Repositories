@@ -85,7 +85,7 @@ export default function App() {
         className={`${openModal && "opacity-40 blur-[2px]"} ${
           isHidden && "opacity-20"
         } 
-      bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50`}
+      bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50 select-none`}
         onClick={() => setOpen(false)}
       />
 
@@ -93,7 +93,7 @@ export default function App() {
         className={`${openModal && "opacity-40 blur-[2px]"} ${
           isHidden && "opacity-20"
         } 
-        bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20`}
+        bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20 select-none`}
         onClick={() => open && setOpen(false)}
       >
         <Card

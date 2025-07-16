@@ -78,7 +78,7 @@ export default function App() {
       }, 1);
       return () => clearTimeout(timeout); // clean up
     }
-  }, [loading, data]);
+  }, [loading]);
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
       <Header

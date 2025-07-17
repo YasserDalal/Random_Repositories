@@ -7,15 +7,18 @@ export default function UserModal({ data, welcomeUser, profileData }) {
   return (
     <>
       <div className='flex-col pb-5'>
-        <div className='text-[#e3e3e3] text-3xl font-semibold pb-8 flex items-center gap-2'>
-          <div>Hello, {profileData && profileData.name}</div>
-          <FontAwesomeIcon icon={faHand} size='sm' className='text-[#ffbe73] animate-wave'/>  
+        <div className={`text-[#e3e3e3] ${(profileData && profileData.name.length) > 10 ? 'text-[clamp(18px,5.7vw,25px)]' : 'text-3xl'} font-semibold pb-8 flex items-center`}>
+          <div className='flex flex-wrap pr-2'>
+            <div className='pr-2'>Hello,</div>
+            <div className=''>{profileData && profileData.name}</div>
+          </div> 
+          <FontAwesomeIcon icon={faHand} size='sm' className='text-[#ffbe73] animate-wave'/> 
         </div>
-        <div className='text-[#b9b9b9] text-base font-medium pb-3'>
+        <div className='text-[#b9b9b9] text-[clamp(14px,4vw,16px)] font-medium pb-3'>
           This is your Github repositories in a randomize order.
           I created this app for fun and learning. I hope we can connect and learn together. 😊
         </div>
-        <div className='text-[#b9b9b9] text-base font-medium'>
+        <div className='text-[#b9b9b9] text-[clamp(14px,4vw,16px)] font-medium'>
           Here is my Github profile 🡢 <a href="https://github.com/YasserDalal" className="text-[#dfdfdf] cursor-pointer hover:underline hover:text-[#c7c7c7] underline-offset-4 decoration-[#c7c7c7]" typeof='button' target='_blank'>YasserDalal</a>
         </div>
       </div>

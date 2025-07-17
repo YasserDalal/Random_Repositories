@@ -128,7 +128,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
         <SubmitButton className='flex justify-center px-5 pb-5' 
         fetchRepository={fetchRepository}/>
         
-        <GuestInfo className='text-gray-400 flex gap-1 text-nowrap justify-center text-[clamp(10.3px,2.81vw,15px)] px-5 pb-5 max-[336px]:text-[10.3px] max-[336px]:px-3'/>
+        <GuestInfo className='text-gray-400 max-[380px]:text-sm justify-center px-5 pb-5 max-[520px]:px-4 text-center max-[510px]:flex max-[510px]:flex-col'/>
 
         <GuestButton className='flex justify-center px-5' 
         fetchRepository={fetchRepository}/>

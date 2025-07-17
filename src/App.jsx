@@ -62,9 +62,9 @@ export default function App() {
     if (loading) {
       // show the loading bar
       setShowBar(true);
-      // add 1% to loadWidth every 10ms
+      // add 0.5% to loadWidth every 10ms
       interval = setInterval(() => {
-        setLoadWidth((prevWidth) => prevWidth + 1);
+        setLoadWidth((prevWidth) => prevWidth + 0.5);
       }, 10);
       return () => clearInterval(interval); // clean up
     }

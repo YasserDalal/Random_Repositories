@@ -3,10 +3,10 @@ import { faHand } from '@fortawesome/free-solid-svg-icons'
 import RepositoryIcon from '../../../assets/git.png'
 import VisitButton from '../VisitButton' 
 
-export default function UserModal({ data, welcomeUser, profileData }) {
+export default function UserModal({ className, data, welcomeUser, profileData }) {
   return (
     <>
-      <div className='flex-col pb-5'>
+      <div className={className}>
         <div className={`text-[#e3e3e3] ${(profileData && profileData.name.length) > 10 ? 'text-[clamp(18px,5.7vw,25px)]' : 'text-3xl'} font-semibold pb-8 flex items-center`}>
           <div className='flex flex-wrap pr-2'>
             <div className='pr-2'>Hello,</div>

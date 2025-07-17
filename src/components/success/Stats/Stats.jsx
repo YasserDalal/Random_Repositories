@@ -5,10 +5,10 @@ import Shields from './StatsComponents/Shields'
 export default function Stats({ className, randomRepo, languageColors }) {
   return (
     <div className={className}>
-      <Language randomRepo={randomRepo} languageColors={languageColors}/>
-      <Stars randomRepo={randomRepo}/>
-      <Forks randomRepo={randomRepo}  />
-      <Shields randomRepo={randomRepo}/>
+      <Language className='text-gray-600 flex gap-1 items-center' randomRepo={randomRepo} languageColors={languageColors}/>
+      <Stars className='text-gray-600 flex gap-1 items-center' randomRepo={randomRepo}/>
+      <Forks className='text-gray-600 flex gap-1 items-center' randomRepo={randomRepo}  />
+      <Shields className='text-gray-600 flex gap-1 items-center' randomRepo={randomRepo}/>
     </div>
   )
 }

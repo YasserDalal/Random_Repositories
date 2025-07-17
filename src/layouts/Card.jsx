@@ -54,33 +54,45 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
     handleRandomRepo();
   };
 
-  const handleNavigateToRepo = () => {
-    window.open(randomRepo.html_url, '_blank');
-  }
+  const handleNavigateToRepo = () => window.open(randomRepo.html_url, '_blank');
+  
   return (
     <div className={className}>
-      <HeaderCard profilePic={profilePic}/>
+      <HeaderCard className='bg-[#101010] pb-6 pt-4 relative z-50' 
+      profilePic={profilePic}/>
 
-      <Dropdown open={open} setOpen={setOpen} languagePicked={languagePicked} languageColors={languageColors} isHidden={isHidden}>
-        {languageChoices.map((choice) => (
-          <Lists className='px-5 py-2 border-b-[1px] text-[17px] border-[#6d6d6d] cursor-pointer hover:bg-[#272727] flex items-center gap-2' key={choice} onClick={() => setLanguagePicked(choice)}>
-            <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: languageColors ? languageColors[choice].color : '#000' }}></div>
+      <Dropdown className='relative pb-6'
+      open={open} 
+      setOpen={setOpen} 
+      languagePicked={languagePicked} 
+      languageColors={languageColors} 
+      isHidden={isHidden}
+        >
+        {languageChoices.map(choice => (
+          <Lists className='px-5 py-2 border-b-[1px] text-[17px] border-[#6d6d6d] cursor-pointer hover:bg-[#272727] flex items-center gap-2' key={choice} 
+          onClick={() => setLanguagePicked(choice)}>
+            <div className='w-3 h-3 rounded-full' style={{ backgroundColor: languageColors ? languageColors[choice].color : '#000' }}></div>
             <div className='flex justify-between flex-1'>
-              <div>
-                {choice}
-              </div> 
-              <div>
-                {languagePicked === choice ? '✓' : ''}
-              </div>
+              <div>{choice}</div> 
+              <div>{languagePicked === choice ? '✓' : ''}</div>
             </div>
           </Lists>
         ))}
       </Dropdown> 
 
-      <Display className={`first-letter:flex flex-col gap-6 pb-6 text-black h-full ${open && 'brightness-[.4]'} cursor-pointer hover:brightness-75 transition ease-in-out duration-100`} randomRepo={randomRepo} languageColors={languageColors} onClick={handleNavigateToRepo}/>
+      <Display className={`${ !isHidden && 'cursor-pointer hover:brightness-75 transition ease-in-out duration-100' } 
+      ${ open && 'brightness-[.4]' } 
+      flex flex-col gap-6 pb-6 text-black h-full `} 
+      randomRepo={randomRepo} 
+      languageColors={languageColors} 
+      onClick={() => !isHidden && handleNavigateToRepo()}/>
     
       {/* remove the comments to see the button */}
-      {<RefreshButton languagePicked={languagePicked} data={data} handleRandomRepo={handleRandomRepo} isHidden={isHidden}/>}
+      {<RefreshButton className={`${!isHidden && 'cursor-pointer hover:scale-105 hover:bg-[#2a2a2a] hover:border-[#2a2a2a] transition ease-in-out duration-100'} 
+      border border-white py-3 px-4 rounded-lg flex justify-center items-center gap-2`} 
+      languagePicked={languagePicked} 
+      data={data} 
+      onClick={() => !isHidden && handleRandomRepo()}/>}
     </div>
   )
 }

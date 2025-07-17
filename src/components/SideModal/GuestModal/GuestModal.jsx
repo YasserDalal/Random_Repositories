@@ -3,10 +3,10 @@ import { faHand } from '@fortawesome/free-solid-svg-icons'
 import RepositoryIcon from '../../../assets/git.png'
 import VisitButton from '../VisitButton'
 
-export default function GuestModal() {
+export default function GuestModal({ className }) {
   return (
     <>
-      <div className='flex-col pb-5'>
+      <div className={className}>
         <div className='text-[#e3e3e3] text-3xl font-semibold pb-8 flex items-center gap-2'>
           <div>Hello Guest!</div>
           <FontAwesomeIcon icon={faHand} size='sm' className='text-[#ffbe73] animate-wave'/>  

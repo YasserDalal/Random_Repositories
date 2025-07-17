@@ -81,23 +81,15 @@ export default function App() {
   }, [loading]);
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
-      <Header
-        className={`${openModal && "opacity-40 blur-[2px]"} ${
-          isHidden && "opacity-20"
-        } 
-      bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50 select-none`}
-        onClick={() => setOpen(false)}
-      />
+      <Header className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" } 
+      bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50 select-none`} 
+      onClick={() => setOpen(false)}/>
 
-      <Center
-        className={`${openModal && "opacity-40 blur-[2px]"} ${
-          isHidden && "opacity-20"
-        } 
-        bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20 select-none`}
-        onClick={() => open && setOpen(false)}
+      <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" } 
+      bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20 select-none`}
+      onClick={() => open && setOpen(false)}
       >
-        <Card
-          className={`${openModal && "opacity-40 blur-[2px]"} 
+        <Card className={`${openModal && "opacity-40 blur-[2px]"} 
         flex flex-col text-white min-w-min max-w-[340px] max-[400px]:min-w-none max-[400px]:max-w-none w-full`}
           open={open}
           setOpen={setOpen}
@@ -116,15 +108,11 @@ export default function App() {
           setNoLanguage={setNoLanguage}
           setOneRepo={setOneRepo}
           setOpenSideModal={setOpenSideModal}
-          setIsHidden={setIsHidden} 
-        />
+          setIsHidden={setIsHidden}/>
       </Center>
 
-      <Footer
-        className={`${openModal && "opacity-40 blur-[2px]"} ${
-          isHidden && "opacity-20"
-        } `}
-        onClick={() => setOpen(false)}
+      <Footer className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" }`}
+      onClick={() => setOpen(false)}
       >
         <Watermark className='flex flex-col justify-center items-center text-[#ababab] pb-3 select-none' />
       </Footer>
@@ -132,8 +120,7 @@ export default function App() {
       {/* Modal is the first thing that users will see */}
       {openModal && (
         <div className='fixed top-0 right-0 bottom-0 left-0 px-4 max-[336px]:px-2 z-50'>
-          <Modal
-            className='opacity-100 bg-[#101010] rounded-xl max-w-[500px] min-w-[300px] w-full pb-7 left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 relative z-50 shadow-[0.5px_3px_20px_0px] shadow-[#717171]'
+          <Modal className='opacity-100 bg-[#101010] rounded-xl max-w-[500px] min-w-[300px] w-full pb-7 left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 relative z-50 shadow-[0.5px_3px_20px_0px] shadow-[#717171]'
             setOpenModal={setOpenModal}
             setUserName={setUserName}
             foundUserName={foundUserName}
@@ -154,8 +141,7 @@ export default function App() {
             setIsHidden={setIsHidden}
             setProfileData={setProfileData}
           />
-          <LoadSignIn
-            className='absolute top-0 left-0 z-40 w-full'
+          <LoadSignIn className='absolute top-0 left-0 z-40 w-full'
             showBar={showBar}
             loadWidth={loadWidth}
           />

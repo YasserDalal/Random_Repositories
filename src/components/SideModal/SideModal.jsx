@@ -57,7 +57,7 @@ export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSi
                                                                       : 'translate-y-96' } 
         fixed bg-[#131313] bottom-0 right-3 max-[455px]:right-0 max-[455px]:left-0 max-[455px]:min-w-none 
         max-[455px]:max-w-none transition-all ease-in-out duration-200 max-w-[430px] min-w-[320px] 
-        w-full rounded-[26px] px-5 max-[350px]:px-4 py-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}> 
+        w-full rounded-[26px] px-5 max-[350px]:px-4 py-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px] z-50`}> 
           <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] 
           cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' 
           onClick={handleCloseSideModal}/>
@@ -74,7 +74,7 @@ export default function SideModal({ data, welcomeGuest, openSideModal, setOpenSi
         <div className={`${ (data && openSideModal && visibleAnimate) ? 'max-[455px]:-translate-y-0 -translate-y-8 flex flex-col' 
                                                                       : 'max-[455px]:-translate-y-0 -translate-y-8 translate-x-[460px]' } 
           fixed bg-[#131313] bottom-0 right-3 max-[455px]:right-0 max-[455px]:left-0 max-[455px]:min-w-none max-[455px]:max-w-none transition-all ease-in-out duration-200 max-w-[430px] min-w-[320px] w-full h-auto rounded-[26px] px-5
-          max-[350px]:px-4 pt-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px]`}>
+          max-[350px]:px-4 pt-5 shadow-[#3f3f3f] shadow-[0px_1px_19px_5px] z-50`}>
           <CloseButton className='absolute top-2 right-2 text-[#e3e3e3] hover:bg-[#b9b9b926] 
           cursor-pointer transition ease-in-out duration-100 px-4 py-[10px] rounded-full' 
           onClick={handleCloseSideModal}/>

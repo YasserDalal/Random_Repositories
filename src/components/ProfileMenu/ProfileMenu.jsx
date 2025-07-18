@@ -1,0 +1,24 @@
+import { useEffect } from 'react'
+
+import {
+  CheckProfile,
+  Logout } from './Menus/Menus'
+
+
+
+export default function ProfileMenu({ className, profileData, opened, children, visibleAnimate, setVisibleAnimate }) {
+  useEffect(() => {
+    let timeout; 
+
+    if (opened) setVisibleAnimate(true) // start the opening animation
+    if(!opened) timeout = setTimeout(() => setVisibleAnimate(false), 250) // start the closing animation (after 250ms remove the node)
+    
+    return () => clearTimeout(timeout) // clean up (if user clicks the button again before 250ms, the timeout will be cleared)
+  }, [opened])
+
+  return (
+    <div className={className}>
+      { children }
+    </div>
+  )
+}

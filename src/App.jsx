@@ -8,6 +8,12 @@ import Watermark from "./components/Watermark/Watermark";
 import Modal from "./layouts/Modal";
 import LoadSignIn from "./components/loading/LoadSignIn";
 import SideModal from "./components/SideModal/SideModal";
+import ProfileMenu from './components/ProfileMenu/ProfileMenu';
+import { 
+    CheckProfile,
+    Logout 
+  } from './components/ProfileMenu/Menus/Menus'  
+
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -32,6 +38,10 @@ export default function App() {
   const [isHidden, setIsHidden] = useState(false);
   const [noLanguage, setNoLanguage] = useState(false);
   const [oneRepo, setOneRepo] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [visibleAnimate, setVisibleAnimate] = useState(false)
+
+  const handleCheckProfile = () => window.open(`https://github.com/${profileData.login}`, '_blank')
 
   useEffect(() => console.log(profileData), [profileData])
 
@@ -82,11 +92,19 @@ export default function App() {
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
       <Header className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" } 
-      bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50 select-none`} 
-      onClick={() => setOpen(false)}/>
+      bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50 select-none relative`} 
+      onClick={() => setOpen(false)}
+      data={data}
+      profileData={profileData}
+      opened={opened}
+      setOpened={setOpened}
+      visibleAnimate={visibleAnimate}
+      setVisibleAnimate={setVisibleAnimate}
+      handleCheckProfile={handleCheckProfile}
+      />
 
       <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" } 
-      bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20 select-none`}
+      bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20 select-none z-40`}
       onClick={() => open && setOpen(false)}
       >
         <Card className={`${openModal && "opacity-40 blur-[2px]"} 
@@ -162,6 +180,25 @@ export default function App() {
         setNoLanguage={setNoLanguage}
         setOneRepo={setOneRepo}
       />
+
+      {(data && profileData) && <ProfileMenu className='min-[840px]:hidden fixed left-0 w-36 bottom-10 z-50'
+                  profileData={profileData}
+                  opened={opened}
+                  setOpened={setOpened}
+                  visibleAnimate={visibleAnimate}
+                  setVisibleAnimate={setVisibleAnimate}>
+                    <div className={`relative z-50 h-[145px] px-2 flex items-center justify-end bg-[#101010] ${(visibleAnimate) && 'border-r border-[#303030]'}`}>
+                      <img className='w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer hover:brightness-75 transition-all ease-in-out duration-100' src={`${profileData && profileData.avatar_url}`} typeof='button' onClick={() => setOpened(!opened)}/>
+                    </div>
+                    {(opened || visibleAnimate) &&
+                    
+                    <div className={`bg-[#101010] max absolute w-56 left-10 -bottom-8 z-40 text-[#b9b9b9] text-[clamp(14px,4vw,16px)]  text-nowrap p-1 py-2 font-medium rounded-r-lg shadow-[#747474] shadow-[-3px_1px_6px_0px] ${(opened && visibleAnimate) ? 'translate-x-[103.5px] -translate-y-[40px]': '-translate-x-[134px] -translate-y-[40px]'} transition ease-in-out duration-200`}>
+                      <CheckProfile className='cursor-pointer rounded-lg px-2 py-4 flex items-center gap-2 hover:shadow-[#747474] hover:shadow-[-2.2px_2px_1px_0px] hover:ml-2 transition-all ease-in-out duration-100' 
+                      handleCheckProfile={handleCheckProfile}/>
+                      <Logout className='cursor-pointer px-2 py-4 rounded-lg flex items-center gap-2 hover:shadow-[#747474] hover:shadow-[-2.2px_2px_1px_0px] hover:ml-2 transition-all ease-in-out duration-100'/>
+                    </div>}
+                  </ProfileMenu>}
+
     </div>
   );
 }

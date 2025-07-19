@@ -197,7 +197,9 @@ export default function App() {
                     <div className={`${(opened || visibleAnimate) && ' backdrop-blur-xl'} ${(visibleAnimate) && 'border-r border-[#303030]'}
                     ${openSideModal && 'opacity-20 pointer-events-none'}
                       relative z-50 h-[136px] px-2 flex items-center justify-end max-[330px]:pl-2 pl-5`}>
-                      <img className={`${(opened || visibleAnimate) ? 'brightness-75 hover:brightness-105': 'hover:brightness-75 brightness-105'} w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer transition-all ease-in-out duration-100`} src={`${profileData && profileData.avatar_url}`} typeof='button' onClick={() => setOpened(!opened)}/>
+                      <img className={`${(opened || visibleAnimate) ? 'brightness-75 hover:brightness-105': 'hover:brightness-75 brightness-105'} w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer transition-all ease-in-out duration-100`} src={`${profileData && profileData.avatar_url}`} typeof='button' onClick={() => {
+                        setOpen(false) 
+                        setOpened(!opened)}}/>
                     </div>
                     {(opened || visibleAnimate) &&
                     

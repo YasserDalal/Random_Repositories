@@ -91,9 +91,12 @@ export default function App() {
   }, [loading]);
   return (
     <div className='bg-[#101010] min-h-screen min-w-[320px] max-w-full w-full flex flex-col relative'>
-      <Header className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" } 
+      <Header className={`${ openModal && "opacity-40 blur-[2px]" } 
       bg-[#101010] text-[clamp(10px,5.29vw,36px)] max-[320px]:text-[17px] pb-24 max-[768px]:pb-20 z-50 select-none relative`} 
-      onClick={() => setOpen(false)}
+      onClick={() => {
+        setOpen(false)
+        setOpened(false)
+      }}
       data={data}
       profileData={profileData}
       opened={opened}
@@ -101,12 +104,17 @@ export default function App() {
       visibleAnimate={visibleAnimate}
       setVisibleAnimate={setVisibleAnimate}
       handleCheckProfile={handleCheckProfile}
+      setIsHidden={setIsHidden}
+      isHidden={isHidden}
+      openSideModal={openSideModal}
       />
 
       <Center className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" } 
-      bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-20 select-none z-40`}
-      onClick={() => open && setOpen(false)}
-      >
+      bg-[#101010] flex justify-center items-center pb-24 max-[768px]:pb-32 select-none z-40`}
+      onClick={() => {
+        open && setOpen(false); 
+        setOpened(false)
+      }}>
         <Card className={`${openModal && "opacity-40 blur-[2px]"} 
         flex flex-col text-white min-w-min max-w-[340px] max-[400px]:min-w-none max-[400px]:max-w-none w-full`}
           open={open}
@@ -130,8 +138,10 @@ export default function App() {
       </Center>
 
       <Footer className={`${ openModal && "opacity-40 blur-[2px]" } ${ isHidden && "opacity-20" }`}
-      onClick={() => setOpen(false)}
-      >
+      onClick={() => {
+        setOpen(false) 
+        setOpened(false)
+      }}>
         <Watermark className='flex flex-col justify-center items-center text-[#ababab] pb-3 select-none' />
       </Footer>
 
@@ -181,18 +191,21 @@ export default function App() {
         setOneRepo={setOneRepo}
       />
 
-      {(data && profileData) && <ProfileMenu className='min-[840px]:hidden fixed left-0 w-36 bottom-10 z-50'
+      {(data && profileData) && <ProfileMenu className='min-[840px]:hidden fixed left-0 bottom-3 z-40'
                   profileData={profileData}
                   opened={opened}
-                  setOpened={setOpened}
+                  setIsHidden={setIsHidden}
                   visibleAnimate={visibleAnimate}
                   setVisibleAnimate={setVisibleAnimate}>
-                    <div className={`relative z-50 h-[145px] px-2 flex items-center justify-end bg-[#101010] ${(visibleAnimate) && 'border-r border-[#303030]'}`}>
-                      <img className='w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer hover:brightness-75 transition-all ease-in-out duration-100' src={`${profileData && profileData.avatar_url}`} typeof='button' onClick={() => setOpened(!opened)}/>
+                    <div className={`${(opened || visibleAnimate) && ' backdrop-blur-xl'} ${(visibleAnimate) && 'border-r border-[#303030]'}
+                    ${openSideModal && 'opacity-20 pointer-events-none'}
+                      relative z-50 h-[136px] px-2 flex items-center justify-end max-[330px]:pl-2 pl-5`}>
+                      <img className={`${(opened || visibleAnimate) ? 'brightness-75 hover:brightness-105': 'hover:brightness-75 brightness-105'} w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer transition-all ease-in-out duration-100`} src={`${profileData && profileData.avatar_url}`} typeof='button' onClick={() => setOpened(!opened)}/>
                     </div>
                     {(opened || visibleAnimate) &&
                     
-                    <div className={`bg-[#101010] max absolute w-56 left-10 -bottom-8 z-40 text-[#b9b9b9] text-[clamp(14px,4vw,16px)]  text-nowrap p-1 py-2 font-medium rounded-r-lg shadow-[#747474] shadow-[-3px_1px_6px_0px] ${(opened && visibleAnimate) ? 'translate-x-[103.5px] -translate-y-[40px]': '-translate-x-[134px] -translate-y-[40px]'} transition ease-in-out duration-200`}>
+                    <div className={`bg-[#101010] absolute w-56 left-10 -bottom-[33.5px] z-40 text-[#b9b9b9] text-[15px] text-nowrap p-1 py-2 font-medium rounded-r-lg shadow-[#747474] shadow-[-3px_1px_6px_0px] ${(opened && visibleAnimate) ? 
+                      'translate-x-[63px] max-[330px]:translate-x-[51.5px] -translate-y-[40px]': '-translate-x-[163px] max-[330px]:-translate-x-[173px] -translate-y-[40px]'} transition ease-in-out duration-200`}>
                       <CheckProfile className='cursor-pointer rounded-lg px-2 py-4 flex items-center gap-2 hover:shadow-[#747474] hover:shadow-[-2.2px_2px_1px_0px] hover:ml-2 transition-all ease-in-out duration-100' 
                       handleCheckProfile={handleCheckProfile}/>
                       <Logout className='cursor-pointer px-2 py-4 rounded-lg flex items-center gap-2 hover:shadow-[#747474] hover:shadow-[-2.2px_2px_1px_0px] hover:ml-2 transition-all ease-in-out duration-100'/>

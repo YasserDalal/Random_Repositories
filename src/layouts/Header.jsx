@@ -2,10 +2,10 @@ import GithubLogo from '../assets/github-mark-white.png'
 import ProfileMenu from '../components/ProfileMenu/ProfileMenu'
 import { CheckProfile, Logout } from '../components/ProfileMenu/Menus/Menus'
 
-export default function Header({ className, onClick, data, profileData, setOpened, opened, visibleAnimate, setVisibleAnimate, handleCheckProfile }) {
+export default function Header({ className, onClick, data, profileData, setOpened, opened, visibleAnimate, setVisibleAnimate, handleCheckProfile, setIsHidden, isHidden, openSideModal }) {
   return (
     <div className={className} typeof='button' onClick={onClick}>
-      <div className='flex gap-5 items-center text-white pt-10 px-10 max-[450px]:px-4 relative z-50 bg-[#101010]'>
+      <div className={`flex gap-5 items-center text-white pt-10 px-10 ${ isHidden && "opacity-20" } max-[450px]:px-4 relative z-50 bg-[#101010] `}>
         <div className='w-14'>
           <img src={GithubLogo} alt="github logo"/>
         </div>
@@ -17,11 +17,10 @@ export default function Header({ className, onClick, data, profileData, setOpene
             text-white absolute right-3 top-0 w-56 bg-[#101010] z-50 max-[840px]:hidden'
             profileData={profileData}
             opened={opened}
-            setOpened={setOpened}
-            visibleAnimate={visibleAnimate}
+            setIsHidden={setIsHidden}
             setVisibleAnimate={setVisibleAnimate}>
-              <div className={`absolute z-50 right-0 top-0 w-60 flex justify-center bg-[#101010] ${(visibleAnimate) && 'border-b border-[#303030]'} pt-3`}>
-                <img className='w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer hover:brightness-75 transition-all ease-in-out duration-100' src={`${profileData.avatar_url}`} typeof='button' onClick={() => setOpened(!opened)}/>
+              <div className={`absolute z-50 right-0 top-0 w-60 flex justify-center bg-[#101010] ${(visibleAnimate) && 'border-b border-[#303030]'} pt-3`} onClick={e => e.stopPropagation()}>
+                <img className={`w-[74px] h-[74px] rounded-full mb-2 overflow-hidden cursor-pointer ${openSideModal && 'opacity-20 pointer-events-none'} hover:brightness-75 transition-all ease-in-out duration-100`} src={`${profileData.avatar_url}`} typeof='button' onClick={() => !openSideModal && setOpened(!opened)}/>
               </div>
               {(opened || visibleAnimate) && 
       

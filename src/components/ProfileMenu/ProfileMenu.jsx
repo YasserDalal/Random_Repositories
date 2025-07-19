@@ -1,11 +1,5 @@
 import { useEffect } from 'react'
 
-import {
-  CheckProfile,
-  Logout } from './Menus/Menus'
-
-
-
 export default function ProfileMenu({ className, opened, children, setVisibleAnimate, setIsHidden }) {
   useEffect(() => {
     let timeout; 

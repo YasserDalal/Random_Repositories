@@ -43,10 +43,7 @@ export default function App() {
 
   const handleCheckProfile = () => window.open(`https://github.com/${profileData.login}`, '_blank')
 
-  useEffect(() => console.log(profileData), [profileData])
-
   useEffect(() => {
-    console.log(data);
     if (data && !languages && !languageColors) {
       fetch(
         "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"

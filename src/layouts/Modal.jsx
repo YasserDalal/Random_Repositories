@@ -41,20 +41,13 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
     if(forGuest === 'YasserDalal'){
       setLoadWidth(0) // reset loadWidth back to 0
       setLoading(true) // start loading
-      const response = await fetch(`https://api.github.com/users/${forGuest}/repos`, {
-        headers: {
-          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github.v3+json',
-        }
-      })
-      const profile = await fetch(`https://api.github.com/users/${forGuest}`, {
-        headers: {
-          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github.v3+json',
-        }
-      })
+
+      const response = await fetch(`https://api.github.com/users/${forGuest}/repos`)
+      const profile = await fetch(`https://api.github.com/users/${forGuest}`)
+
       const data = await response.json() // repo data
       const profileData = await profile.json() // user data
+
       handleClickSubmit(data)
       setProfileData(profileData)
       setOpenSideModal(true)
@@ -63,7 +56,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
       return;
     }
 
-    if(!userName.length){
+    if(!userName.length){ 
       setShowWarning(true)  // if username is empty show the warning immediately
       return;
     }
@@ -82,12 +75,7 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
 
       const response = await fetch(`https://api.github.com/users/${userName}/repos`);
 
-      const profile = await fetch(`https://api.github.com/users/${userName}`, {
-        headers: {
-          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github.v3+json',
-        }
-      })
+      const profile = await fetch(`https://api.github.com/users/${userName}`)
 
       if (!response.ok){
         setFoundUserName(false) // if no user found setFoundUserName to false
@@ -99,9 +87,10 @@ export default function Modal({ className, setFoundUserName, foundUserName, setO
 
       const data = await response.json(); // parse the json into object
       const profileData = await profile.json()
+
       setProfileData(profileData)
       handleClickSubmit(data); // call handleClickSubmit
-
+      
     } catch (err) {
       console.error('Caught error:', err.message);
     }

@@ -116,8 +116,6 @@ export default function App() {
         flex flex-col text-white min-w-min max-w-[340px] max-[400px]:min-w-none max-[400px]:max-w-none w-full`}
           open={open}
           setOpen={setOpen}
-          setData={setData}
-          userName={userName}
           profilePic={profilePic}
           data={data}
           setLanguagePicked={setLanguagePicked}
@@ -125,9 +123,7 @@ export default function App() {
           randomRepo={randomRepo}
           languageColors={languageColors}
           setRandomRepo={setRandomRepo}
-          welcomeGuest={welcomeGuest}
           isHidden={isHidden}
-          profileData={profileData}
           setNoLanguage={setNoLanguage}
           setOneRepo={setOneRepo}
           setOpenSideModal={setOpenSideModal}
@@ -158,7 +154,6 @@ export default function App() {
             setPrevName={setPrevName}
             prevName={prevName}
             setLoadWidth={setLoadWidth}
-            setLanguages={setLanguages}
             setRandomRepo={setRandomRepo}
             setOpenSideModal={setOpenSideModal}
             setWelcomeGuest={setWelcomeGuest}
@@ -189,10 +184,8 @@ export default function App() {
       />
 
       <ProfileMenu className={`${ openModal && "hidden" } ${ (isHidden && !opened) && "opacity-20" } min-[840px]:hidden fixed left-0 bottom-3 z-40`}
-        profileData={profileData}
         opened={opened}
         setIsHidden={setIsHidden}
-        visibleAnimate={visibleAnimate}
         setVisibleAnimate={setVisibleAnimate}>
           <div className={`${(opened || visibleAnimate) && ' backdrop-blur-xl'} ${(visibleAnimate) && 'border-r border-[#303030]'}
             relative z-50 h-[136px] px-2 flex items-center justify-end max-[330px]:pl-2 pl-5`}>

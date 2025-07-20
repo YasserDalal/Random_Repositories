@@ -82,7 +82,7 @@ export default function Card({ className, open, setOpen, data, profilePic, setLa
 
       <Display className={`${ !isHidden && 'cursor-pointer hover:brightness-75 transition ease-in-out duration-100' } 
       ${ open && 'brightness-[.4]' } 
-      flex flex-col gap-6 pb-6 text-black h-full `} 
+      flex flex-col gap-6 mb-6 text-black h-full`} 
       randomRepo={randomRepo} 
       languageColors={languageColors} 
       onClick={() => !isHidden && handleNavigateToRepo()}/>

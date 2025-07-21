@@ -7,12 +7,13 @@ export default function UserModal({ className, data, welcomeUser, profileData })
   return (
     <>
       <div className={className}>
-        <div className={`text-[#e3e3e3] ${(profileData && profileData.name.length) > 10 ? 'text-[clamp(18px,5.7vw,25px)]' : 'text-3xl'} font-semibold pb-8 flex items-center`}>
+        <div className={`text-[#e3e3e3] ${(profileData && profileData.name.length) >= 16 ? 'text-[clamp(18px,5.7vw,25px)]' : 'text-3xl'} font-semibold pb-8 flex items-center pr-6`}>
           <div className='flex flex-wrap pr-2'>
-            <div className='pr-2'>Hello,</div>
+            <div className='pr-2'>Hello, {(profileData && profileData.name.length) > 16 &&
+              <FontAwesomeIcon icon={faHand} size='sm' className='text-[#ffbe73] animate-wave'/>}</div>
             <div className=''>{profileData && profileData.name}</div>
-          </div> 
-          <FontAwesomeIcon icon={faHand} size='sm' className='text-[#ffbe73] animate-wave'/> 
+          </div>
+          {(profileData && profileData.name.length) <= 16 && <FontAwesomeIcon icon={faHand} size='sm' className='text-[#ffbe73] animate-wave'/>}
         </div>
         <div className='text-[#b9b9b9] text-[clamp(14px,4vw,16px)] font-medium pb-3'>
           This is your Github repositories in a randomize order.
